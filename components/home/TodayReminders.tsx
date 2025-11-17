@@ -10,7 +10,12 @@ export default function TodayReminders() {
   const [todayReminders, setTodayReminders] = useState<any[]>([])
   const [doneReminders, setDoneReminders] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
-  const today = new Date().toISOString().split("T")[0]
+  const getKSTDate = () => {
+    const now = new Date()
+    const offset = now.getTime() + 9 * 60 * 60 * 1000
+    return new Date(offset).toISOString().split("T")[0]
+  }
+  const today = getKSTDate() // ✅ 한국날짜로 불러오기
 
 
   // ✅ 리마인더 불러오기

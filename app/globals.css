@@ -3,6 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* 커스텀 브레이크포인트: 1000px 기준으로 모바일/PC 구분 */
+@custom-media --pc (width >= 1000px);
+@custom-media --mobile (width < 1000px);
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -24,6 +24,7 @@ export function BottomNav() {
         pb-[calc(env(safe-area-inset-bottom)+1rem)]
         shadow-[0_-2px_10px_rgba(0,0,0,0.05)]
         z-50
+        lg:hidden
       "
     >
       {navItems.map((item) => {

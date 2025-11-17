@@ -25,6 +25,10 @@ export default function FloatingAddButton({ onAdded }: { onAdded?: () => void })
   const [newTask, setNewTask] = useState("")
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())
   const [calendarOpen, setCalendarOpen] = useState(false)
+  const toKSTDateString = (date: Date) => {
+    const KST_OFFSET = 9 * 60 * 60 * 1000
+    return new Date(date.getTime() + KST_OFFSET).toISOString().split("T")[0]
+  }
 
   // ✅ 일정 추가 로직
   const handleAddReminder = async () => {
@@ -41,7 +45,7 @@ export default function FloatingAddButton({ onAdded }: { onAdded?: () => void })
       return
     }
 
-    const dateStr = selectedDate.toISOString().split("T")[0]
+    const dateStr = toKSTDateString(selectedDate)
 
     const { error } = await supabase.from("reminders").insert([
       {
@@ -70,7 +74,7 @@ export default function FloatingAddButton({ onAdded }: { onAdded?: () => void })
       {/* ✅ 플로팅 버튼 */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-24 right-6 z-50 w-14 h-14 bg-[#FE398E] text-white rounded-full shadow-lg flex items-center justify-center hover:opacity-90"
+        className="fixed bottom-24 right-6 lg:bottom-10 z-50 w-14 h-14 bg-[#FE398E] text-white rounded-full shadow-lg flex items-center justify-center hover:opacity-90"
       >
         <Plus size={28} />
       </button>
